@@ -18,7 +18,7 @@ class testGetWeather extends TestCase
     public function testGetWeather()
     {
         //json
-        $response = new Res(200,[],'{"success": true}');
+        $response = new Response(200,[],'{"success": true}');
         $client = \Mockery::mock(Client::class);
 
         $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo', [
@@ -114,7 +114,22 @@ class testGetWeather extends TestCase
 
         $this->expectException(HttpException::class);
         $this->expectExceptionMessage('request timeout');
-        $w->getWeather('深圳');
+        $w->getWeather('深圳','base','json');
     }
 
+    public function testGetLiveWeather(){
+        $w= \Mockery::mock(Weather::class,['mock-key'])->makePartial();
+        $w->expects()->getWeather('广州','base','json')->andReturn(['success'=>true]);
+        $this->assertSame(['success'=>true],$w->getLiveWeather('深圳','json'));
+    }
+
+    public function testGetForecastsWeather()
+    {
+        // 将 getWeather 接口模拟为返回固定内容，以测试参数传递是否正确
+        $w = \Mockery::mock(Weather::class, ['mock-key'])->makePartial();
+        $w->expects()->getWeather('广州', 'all', 'json')->andReturn(['success' => true]);
+
+        // 断言正确传参并返回
+        $this->assertSame(['success' => true], $w->getForecastsWeather('广州','json'));
+    }
 }

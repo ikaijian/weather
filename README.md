@@ -19,13 +19,16 @@ use Jeesonjian\Weather\Weather;
 
 $key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
-$weather = new Weather($key);Copy
+$weather = new Weather($key);
 ~~~
 
 ### 获取实时天气
 ~~~
-$response = $weather->getWeather('深圳');Copy
+$response = $weather->getWeather('深圳'，'base','json');
+// 获取实时天气
+$response = $w->getLiveWeather('深圳','json');
 ~~~
+
 示例：
 ~~~json
 {
@@ -51,7 +54,9 @@ $response = $weather->getWeather('深圳');Copy
 
 ### 获取近期天气预报
 ~~~
-$response = $weather->getWeather('深圳', 'all');
+$response = $weather->getWeather('深圳', 'all','json');
+// 获取天气预报
+$response = $w->getForecastsWeather('深圳','json');
 ~~~
 示例：
 ~~~json
