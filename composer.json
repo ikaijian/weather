@@ -1,0 +1,27 @@
+{
+    "name": "jeesonjian\/weather",
+    "description": "A weather SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kaijianchen",
+            "email": "1144285537@qq.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+        "mockery/mockery": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jeesonjian\\Weather\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jeesonjian\\Weather\\ServiceProvider"
+            ]
+        }
+    }
+}
